@@ -1,26 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-function App() {
+import Axios from 'axios';
+import Room from './Room';
+export default () => {
+  const [greeting, setGreeting] = React.useState("")
+  React.useEffect(() => {
+    Axios.get("http://localhost:2012/auth")
+      .then(res => setGreeting(res.data))
+      .catch(error => console.log(error))
+  })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Room />
+  )
 }
-
-export default App;
